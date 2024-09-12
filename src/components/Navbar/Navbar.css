@@ -10,6 +10,7 @@
 }
 .brand-and-toggler{
     width: 100%;
+    height: 50px;
 }
 .navbar-content{
     display: flex;

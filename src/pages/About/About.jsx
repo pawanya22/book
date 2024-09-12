@@ -1,28 +1,43 @@
 import React from 'react';
 import "./About.css";
-import aboutImg from "../../images/about-img.jpg";
+import { Player } from '@lottiefiles/react-lottie-player';
+import animationData from "../../images/ani.json"; // Ensure this path is correct
 
 const About = () => {
   return (
     <section className='about'>
       <div className='container'>
         <div className='section-title'>
-          <h2>About</h2>
+          <h2>About Us</h2>
+          <p className='intro-text'>Welcome to Litheaven, your ultimate online destination for discovering books that spark your interest!</p>
         </div>
 
         <div className='about-content grid'>
-          <div className='about-img'>
-            <img src = {aboutImg} alt = "" />
+          <div className='animation-section'>
+            <Player
+              autoplay
+              loop
+              src={animationData}
+              style={{ height: '1000px', width: '800px', marginLeft: '-200px' }} // Adjust size and margin
+            />
           </div>
+          
           <div className='about-text'>
-            <h2 className='about-title fs-26 ls-1'>About BookHub</h2>
-            <p className='fs-17'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dignissimos consequuntur vero commodi provident maiores, iusto atque corrupti voluptate vel sequi consectetur unde aliquam corporis saepe animi non, tempora reiciendis molestias sed laudantium dolores. Assumenda aperiam fuga quo voluptate commodi ullam aliquam expedita voluptas delectus.</p>
-            <p className='fs-17'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, dicta, possimus inventore eveniet atque voluptatibus repellendus aspernatur illo aliquam dignissimos illum. Commodi, porro omnis dolore amet neque modi quas eum!</p>
+            <h3>Who We Are</h3>
+            <p>At Litheaven, our mission is to make the world of books accessible and enjoyable for everyone. We are passionate about reading and believe that everyone should have the tools to find their next great read easily. Our team is dedicated to providing a comprehensive and user-friendly platform that helps book enthusiasts, casual readers, and researchers alike discover, explore, and enjoy books.</p>
+            <h3>Our Journey</h3>
+            <p>Litheaven started with a simple idea: to create a space where book lovers could easily find and explore books. Over time, we’ve expanded our features and improved our platform based on user feedback and technological advancements. Today, we continue to grow and evolve, always with our users’ needs in mind.</p>
+            <h3>Get In Touch</h3>
+            <p>We love hearing from our users! If you have any questions, feedback, or suggestions, please don’t hesitate to reach out.</p>
+            <p>Thank you for choosing Litheaven. We hope you find your next great book with us!</p>
+            <p>Happy Reading!</p>
+            <p><strong>The Litheaven Team</strong></p>
           </div>
+        
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default About
+export default About;

@@ -1,14 +1,35 @@
-.header-content{
-    min-height: 75vh;
-    background: linear-gradient(rgba(181, 107, 242, 0.3), rgba(14, 15, 15, 0.5)), url("../../images/hero.png") center/cover no-repeat;
-    flex-direction: column;
+.header-content {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: row; /* Change to row to position text and animation side by side */
+    align-items: center;
+    justify-content: space-between; /* Space between text and animation */
+    background: linear-gradient(
+        rgba(181, 107, 242, 0.4),
+        rgba(240, 238, 238, 0.4)
+    ), url("../../images/hero.png") center/cover no-repeat;
+    padding: 6rem;
+    color: white;
 }
-.header-title{
-    font-size: 4.2rem;
+
+.text-section {
+    max-width: 50%; /* Adjust to fit the content */
 }
-.header-text{
-    margin-top: -1.8rem;
-    margin-bottom: 2.8rem;
-    opacity: 0.8;
-    max-width: 770px;
+
+.header-title {
+    font-size: 5rem;
+    margin-left: 20px;
+    margin-bottom: 1rem;
+}
+
+.header-text {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.animation-section {
+    flex-shrink: 0; /* Prevent the animation from shrinking */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
