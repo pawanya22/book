@@ -5,7 +5,7 @@ import Loading from "../Loader/Loader";
 import coverImg from "../../images/cover_not_found.jpg";
 import "./BookDetails.css";
 import { FaArrowLeft } from "react-icons/fa";
-import BookReviews from '../BookReviews'; // Import the BookReviews component
+//import BookReviews from '../BookReviews'; // Import the BookReviews component
 
 const URL = "https://openlibrary.org/works/";
 
@@ -69,11 +69,11 @@ const BookDetails = () => {
               <span>{book?.description}</span>
             </div>
             <div className='book-details-item'>
-              <span className='fw-6'>Subject Places: </span>
+              <span className='fw-6'>Places: </span>
               <span className='text-italic'>{book?.subject_places}</span>
             </div>
             <div className='book-details-item'>
-              <span className='fw-6'>Subject Times: </span>
+              <span className='fw-6'>Times: </span>
               <span className='text-italic'>{book?.subject_times}</span>
             </div>
             <div className='book-details-item'>
@@ -82,12 +82,13 @@ const BookDetails = () => {
             </div>
           </div>
         </div> 
-        {book && (
-          <BookReviews bookId={book.key} /> // Add the BookReviews component
-        )}
+       
       </div>
     </section>
   );
 }
 
 export default BookDetails;
+ //{book && (
+      //    <BookReviews bookId={book.key} /> // Add the BookReviews component
+       // )}

@@ -1,10 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'; // Import Framer Motion
+import { useInView } from 'react-intersection-observer'; // Import Intersection Observer
 import './PopularBooks.css'; // Ensure this is correctly imported
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 50,
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+    },
+  },
+  exit: { opacity: 0, y: -50, transition: { ease: 'easeInOut' } },
+};
+
+const bookVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+  exit: { opacity: 0, scale: 0.8, transition: { duration: 0.3 } },
+};
 
 const PopularBooks = () => {
   const [books, setBooks] = useState([]);
   const navigate = useNavigate(); // Use navigate hook
+
+  const { ref, inView } = useInView({
+    triggerOnce: false, // Set to false so it triggers the animation each time it comes into view
+    threshold: 0.1, // 10% of the component is visible before triggering
+  });
 
   useEffect(() => {
     async function fetchPopularBooks() {
@@ -12,7 +40,7 @@ const PopularBooks = () => {
         const response = await fetch('https://openlibrary.org/subjects/popular.json');
         const data = await response.json();
         if (data && data.works) {
-          setBooks(data.works.slice(0, 10)); // Display top 10 popular books
+          setBooks(data.works.slice(0, 20)); // Display top 10 popular books
         } else {
           console.error("Failed to fetch popular books data.");
         }
@@ -28,18 +56,26 @@ const PopularBooks = () => {
   };
 
   return (
-    <section className='popular-books'>
+    <motion.section
+      className='popular-books'
+      ref={ref} // Attach Intersection Observer ref to the section
+      variants={containerVariants}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"} // Trigger animation based on inView
+      exit="exit"
+    >
       <div className='container'>
         <div className='section-title'>
           <h2>Popular Books</h2>
         </div>
-        <div className='booklist-content horizontal-scroll'>
+        <motion.div className='booklist-content horizontal-scroll'>
           {books.length > 0 ? (
             books.map((book) => (
-              <div
+              <motion.div
                 className='book-item'
                 key={book.key}
                 onClick={() => handleBookClick(book.key.replace('/works/', ''))}
+                variants={bookVariants}
               >
                 <img
                   src={`https://covers.openlibrary.org/b/id/${book.cover_id}-L.jpg`}
@@ -49,14 +85,14 @@ const PopularBooks = () => {
                   <span className='book-item-info-item title'>{book.title}</span>
                   <span className='book-item-info-item author'>{book.author_name?.join(", ")}</span>
                 </div>
-              </div>
+              </motion.div>
             ))
           ) : (
             <p>No popular books found.</p>
           )}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
